@@ -6,7 +6,7 @@ import "testing"
 
 func TestAnalize(t *testing.T) {
 	a := analyzer{}
-	stats, err := a.start([]string{"internal/simple.go"})
+	stats, err := a.analyze([]string{"internal/simple.go"})
 	expectedResults := map[string]int{
 		"NoComplexity": 1,
 		"OneIf":        2,

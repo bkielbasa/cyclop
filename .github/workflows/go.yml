@@ -29,4 +29,4 @@ jobs:
       run: go test -v .
 
     - name: Check it's own cyclomatic complexity
-      run: go run main.go ,
+      run: go run main.go fmt.go sort.go analyzer.go .

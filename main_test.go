@@ -4,7 +4,7 @@ import "github.com/stretchr/testify/assert"
 import "github.com/stretchr/testify/require"
 import "testing"
 
-func TestAnalize(t *testing.T) {
+func TestAnalyze(t *testing.T) {
 	a := analyzer{}
 	stats, err := a.analyze([]string{"internal/simple.go"})
 	expectedResults := map[string]int{

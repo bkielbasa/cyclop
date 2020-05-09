@@ -22,18 +22,22 @@ func main() {
 		return
 	}
 
-	a := analyzer{
-		noTests: *noTests,
-		top:     *top,
+	c := NewCyclop()
+
+	if *noTests {
+		c = c.WithNoTests()
 	}
 
-	stats, err := a.analyze(args)
+	if *top > 0 {
+		c = c.WithTopResults(*top)
+	}
+
+	stats, err := c.AnalyzePaths(args)
 	if err != nil {
 		fmt.Print(err)
 		os.Exit(1)
 	}
 
-	sortStats(stats)
 	if len(stats) != 0 {
 		display(stats)
 	}

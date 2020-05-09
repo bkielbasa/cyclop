@@ -11,8 +11,6 @@ import (
 )
 
 type analyzer struct {
-	noTests bool
-	top     int
 }
 
 func (a analyzer) analyze(paths []string) ([]stat, error) {
@@ -64,10 +62,6 @@ func (a analyzer) analyzeDir(path string) ([]stat, error) {
 func (a analyzer) fileReport(path string) ([]stat, error) {
 	stats := []stat{}
 	if !strings.HasSuffix(path, ".go") {
-		return stats, nil
-	}
-
-	if a.noTests && strings.HasSuffix(path, "_test.go") {
 		return stats, nil
 	}
 

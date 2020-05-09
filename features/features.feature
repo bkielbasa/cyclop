@@ -4,6 +4,8 @@ Feature: Calculating the complexity
     Then it returns no error
     And cyclomatic complexity of function NoComplexity equals 1
     And cyclomatic complexity of function OneIf equals 2
+    And cyclomatic complexity of function And equals 3
+    And cyclomatic complexity of function Or equals 3
   Scenario: subdirectory
     When analyze path "internal/sub/"
     Then it returns no error

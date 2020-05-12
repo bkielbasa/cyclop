@@ -7,9 +7,9 @@ func NewCyclop() Cyclop {
 }
 
 type Cyclop struct {
-	analyzer analyzer
+	analyzer  analyzer
 	skipTests bool
-	top int
+	top       int
 }
 
 func (c Cyclop) AnalyzePaths(paths []string) ([]stat, error) {
@@ -20,6 +20,11 @@ func (c Cyclop) AnalyzePaths(paths []string) ([]stat, error) {
 	}
 
 	sortStats(stats)
+
+	if c.top > 0 {
+		stats = maxTop(stats, c.top)
+	}
+
 	return stats, err
 }
 
@@ -45,4 +50,8 @@ func (c Cyclop) filterOutTests(stats []stat) []stat {
 	}
 
 	return res
+}
+
+func maxTop(s []stat, max int) []stat {
+	return s[:max]
 }

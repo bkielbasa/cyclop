@@ -9,11 +9,20 @@ func OneIf() {
 }
 
 func And() {
-	if 1 == 2 && 2 ==1 {
+	if 1 == 2 && 2 == 1 {
 	}
 }
 
 func Or() {
-	if 1 == 2 || 2 ==1 {
+	if 1 == 2 || 2 == 1 {
 	}
+}
+
+type S struct {
+}
+
+func (s S) AFunction() {
+}
+
+func (s *S) PointerFunction() {
 }

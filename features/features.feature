@@ -29,3 +29,8 @@ Feature: Calculating the complexity
     When analyze path "internal/"
     Then it returns no error
     And the size of the result should equal 3
+  Scenario: return only top 3 most complex functions
+    Given set skipping tests
+    When analyze path "internal/tests_test.go"
+    Then it returns no error
+    And the size of the result should equal 0

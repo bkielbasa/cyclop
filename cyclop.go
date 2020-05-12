@@ -42,7 +42,7 @@ func (c Cyclop) filterOutTests(stats []stat) []stat {
 	res := []stat{}
 
 	for _, s := range stats {
-		if strings.HasSuffix(s.FuncName, "Test") {
+		if strings.HasPrefix(s.FuncName, "Test") {
 			continue
 		}
 
@@ -53,5 +53,8 @@ func (c Cyclop) filterOutTests(stats []stat) []stat {
 }
 
 func maxTop(s []stat, max int) []stat {
+	if max > len(s) {
+		max = len(s)
+	}
 	return s[:max]
 }

@@ -11,6 +11,7 @@ func TestScenarios(t *testing.T) {
 	suite := gobdd.NewSuite(t)
 	suite.AddStep(`analyze path "(.+)"`, analyze)
 	suite.AddStep(`set top parameter to (\d+)`, setTopParameterTo)
+	suite.AddStep(`set skipping tests`, setSkippingTests)
 	suite.AddStep(`it returns no error`, itReturnsNoError)
 	suite.AddStep(`cyclomatic complexity of function ([\(\)\.a-zA-Z0-9]+) equals (\d+)`, cyclomaticComplexityOfFunctionEquals)
 	suite.AddStep(`the size of the result should equal (\d+)`, theSizeOfResultShouldEqual)
@@ -24,6 +25,10 @@ func analyze(t gobdd.StepTest, ctx context.Context, filePath string) context.Con
 	c := NewCyclop()
 	if top, err := ctx.GetInt("top"); err == nil && top > 0 {
 		c = c.WithTopResults(top)
+	}
+
+	if skip, err := ctx.GetBool("skip-tests"); err == nil && skip == true {
+		c = c.WithNoTests()
 	}
 
 	stats, err := c.AnalyzePaths([]string{filePath})
@@ -61,6 +66,11 @@ func cyclomaticComplexityOfFunctionEquals(t gobdd.StepTest, ctx context.Context,
 	}
 
 	t.Errorf("could not find statistics for function %s", f)
+	return ctx
+}
+
+func setSkippingTests(t gobdd.StepTest, ctx context.Context) context.Context {
+	ctx.Set("skip-tests", true)
 	return ctx
 }
 

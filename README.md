@@ -21,12 +21,15 @@ Options
         displays only average complexity in short format
   -top int
         displays top N functions with the biggest complexity
+  -total
+        displays total coverage
+
 ```
 
 Examples
 
 ```
-cyclo .
-cyclo -no-tests=true .
-cyclo -top=10 .
+cyclop .
+cyclop -no-tests=true .
+cyclop -top=10 .
 ```

@@ -1,10 +1,12 @@
 package main
 
 import (
+	"bytes"
 	"testing"
 
 	"github.com/go-bdd/gobdd"
 	"github.com/go-bdd/gobdd/context"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestScenarios(t *testing.T) {
@@ -16,6 +18,15 @@ func TestScenarios(t *testing.T) {
 	suite.AddStep(`cyclomatic complexity of function ([\(\)\.a-zA-Z0-9]+) equals (\d+)`, cyclomaticComplexityOfFunctionEquals)
 	suite.AddStep(`the size of the result should equal (\d+)`, theSizeOfResultShouldEqual)
 	suite.Run()
+}
+
+func TestRun(t *testing.T) {
+	var buf []byte
+	b := bytes.NewBuffer(buf)
+	err := run(b, []string{"internal/simple.go"})
+
+	assert.NoError(t, err)
+	assert.Equal(t, "3 internal.Or\n3 internal.And\n2 internal.OneIf\n1 internal.(*S).PointerFunction\n1 internal.(S).AFunction\n1 internal.NoComplexity\n", b.String())
 }
 
 type statsKey struct{}

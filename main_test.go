@@ -29,6 +29,15 @@ func TestRun(t *testing.T) {
 	assert.Equal(t, "3 internal.Or\n3 internal.And\n2 internal.OneIf\n1 internal.(*S).PointerFunction\n1 internal.(S).AFunction\n1 internal.NoComplexity\n", b.String())
 }
 
+func TestRunWitTotal(t *testing.T) {
+	var buf []byte
+	b := bytes.NewBuffer(buf)
+	err := run(b, []string{"-total=true", "internal/simple.go"})
+
+	assert.NoError(t, err)
+	assert.Equal(t, "Total: 11\n", b.String())
+}
+
 type statsKey struct{}
 type statsErrKey struct{}
 

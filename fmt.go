@@ -27,9 +27,5 @@ func displayTotal(w io.Writer, stats []stat) {
 		t += stats[i].Complexity
 	}
 
-	if *shortAvg {
-		_, _ = fmt.Fprintf(w, fmt.Sprintf("%d\n", t))
-	} else {
-		_, _ = fmt.Fprintf(w, fmt.Sprintf("Total: %d\n", t))
-	}
+	_, _ = fmt.Fprintf(w, fmt.Sprintf("Total: %d\n", t))
 }

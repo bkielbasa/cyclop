@@ -11,6 +11,7 @@ var (
 	top      = flag.Int("top", 0, "displays top N functions with the biggest complexity")
 	failFrom = flag.Int("fail-from", 10, "returns the program with non-zero result if find at least one function with complexity higher than N")
 	shortAvg = flag.Bool("short-avg", false, "displays only average complexity in short format")
+	total = flag.Bool("total", false, "displays total coverage")
 )
 
 func main() {
@@ -38,8 +39,10 @@ func main() {
 		os.Exit(1)
 	}
 
-	if len(stats) != 0 {
-		display(stats)
+	if *total {
+		displayTotal(os.Stdout, stats)
+	} else if len(stats) != 0 {
+		display(os.Stdout, stats)
 	}
 
 	if isFailed(stats) {

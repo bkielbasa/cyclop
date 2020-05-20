@@ -1,8 +1,9 @@
 package main
 
 import (
+	"errors"
 	"flag"
-	"fmt"
+	"io"
 	"os"
 )
 
@@ -11,15 +12,22 @@ var (
 	top      = flag.Int("top", 0, "displays top N functions with the biggest complexity")
 	failFrom = flag.Int("fail-from", 10, "returns the program with non-zero result if find at least one function with complexity higher than N")
 	shortAvg = flag.Bool("short-avg", false, "displays only average complexity in short format")
+	total    = flag.Bool("total", false, "displays total coverage")
 )
 
 func main() {
-	flag.Parse()
+	if err := run(os.Stdout, os.Args[1:]); err != nil {
+		os.Exit(1)
+	}
+}
+
+func run(w io.Writer, sysArgs []string) error {
+	flag.CommandLine.Parse(sysArgs)
 
 	args := flag.Args()
 	if len(args) == 0 {
 		flag.Usage()
-		return
+		return nil
 	}
 
 	c := NewCyclop()
@@ -34,17 +42,19 @@ func main() {
 
 	stats, err := c.AnalyzePaths(args)
 	if err != nil {
-		fmt.Print(err)
-		os.Exit(1)
+		return err
 	}
 
-	if len(stats) != 0 {
-		display(stats)
+	if *total {
+		displayTotal(w, stats)
+	} else if len(stats) != 0 {
+		display(w, stats)
 	}
 
 	if isFailed(stats) {
-		os.Exit(1)
+		return errors.New("failed")
 	}
+	return nil
 }
 
 func isFailed(stats []stat) bool {

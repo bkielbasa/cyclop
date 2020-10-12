@@ -51,7 +51,7 @@ func analyze(t gobdd.StepTest, ctx context.Context, filePath string) context.Con
 		c = c.WithNoTests()
 	}
 
-	stats, err := c.AnalyzePaths([]string{filePath})
+	stats, err := c.AnalyzePaths([]string{filePath}, "")
 	ctx.Set(statsKey{}, stats)
 	ctx.Set(statsErrKey{}, err)
 	return ctx

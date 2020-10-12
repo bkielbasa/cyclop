@@ -13,6 +13,7 @@ var (
 	failFrom = flag.Int("fail-from", 10, "returns the program with non-zero result if find at least one function with complexity higher than N")
 	shortAvg = flag.Bool("short-avg", false, "displays only average complexity in short format")
 	total    = flag.Bool("total", false, "displays total coverage")
+	ignore   = flag.String("ignore", "", "exclude files matching the given regular expression")
 )
 
 func main() {
@@ -40,7 +41,7 @@ func run(w io.Writer, sysArgs []string) error {
 		c = c.WithTopResults(*top)
 	}
 
-	stats, err := c.AnalyzePaths(args)
+	stats, err := c.AnalyzePaths(args, *ignore)
 	if err != nil {
 		return err
 	}

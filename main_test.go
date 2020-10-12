@@ -29,6 +29,15 @@ func TestRun(t *testing.T) {
 	assert.Equal(t, "3 internal.Or\n3 internal.And\n2 internal.OneIf\n1 internal.(*S).PointerFunction\n1 internal.(S).AFunction\n1 internal.NoComplexity\n", b.String())
 }
 
+func TestRunWithIgnoredFiles(t *testing.T) {
+	var buf []byte
+	b := bytes.NewBuffer(buf)
+	err := run(b, []string{"-ignore=pointer", "internal/simple.go", "internal/pointer.go"})
+
+	assert.NoError(t, err)
+	assert.NotContains(t, b.String(), "WithPointerReceiver")
+}
+
 func TestRunWitTotal(t *testing.T) {
 	var buf []byte
 	b := bytes.NewBuffer(buf)

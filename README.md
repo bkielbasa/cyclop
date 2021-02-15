@@ -13,23 +13,46 @@ go get github.com/bkielbasa/cyclop
 Options
 
 ```
-  -fail-from int
-        returns the program with non-zero result if find at least one function with complexity higher than N (default 10)
-  -no-tests
-        should ignore test files (default true)
-  -short-avg
-        displays only average complexity in short format
-  -top int
-        displays top N functions with the biggest complexity
-  -total
-        displays total coverage
+cyclop: calculates cyclomatic complexity
+
+Usage: cyclop [-flag] [package]
+
+
+Flags:
+  -V    print version and exit
+  -all
+        no effect (deprecated)
+  -c int
+        display offending line with this many lines of context (default -1)
+  -cpuprofile string
+        write CPU profile to this file
+  -debug string
+        debug flags, any subset of "fpstv"
+  -fix
+        apply all suggested fixes
+  -flags
+        print analyzer flags in JSON
+  -json
+        emit JSON output
+  -maxComplexity int
+        max complexity the function can have (default 10)
+  -memprofile string
+        write memory profile to this file
+  -packageAverage float
+        max avarage complexity in package
+  -skipTests
+        should the linter execute on test files as well
+  -source
+        no effect (deprecated)
+  -tags string
+        no effect (deprecated)
+  -trace string
+        write trace log to this file
+  -v    no effect (deprecated)
 
 ```
 
-Examples
-
-```
-cyclop .
-cyclop -no-tests=true .
-cyclop -top=10 .
-```
+Important parameters are:
+* `-maxComplexity int` - the max complexity calculated for a single function. `10` by default
+* `-packageAvarage float64` - the average cyclomatic complexity for a package. If the value is higher than `0` it will reaise an error if the average will be higher. `0` default. 
+* `-skipTests bool` - should checks be executed in tests files. `false` by default

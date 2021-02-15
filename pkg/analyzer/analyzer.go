@@ -14,6 +14,7 @@ var (
 )
 
 var maxComplexity int
+var packageAverage float64
 var skipTests bool
 
 func NewAnalyzer() *analysis.Analyzer {
@@ -27,14 +28,26 @@ func NewAnalyzer() *analysis.Analyzer {
 
 func init() {
 	flagSet.IntVar(&maxComplexity, "maxComplexity", 10, "max complexity the function can have")
+	flagSet.Float64Var(&packageAverage, "packageAverage", 0, "max avarage complexity in package")
 	flagSet.BoolVar(&skipTests, "skipTests", false, "should the linter execute on test files as well")
 }
 
 func run(pass *analysis.Pass) (interface{}, error) {
+	var sum, count float64
+	var pkgName string
+	var pkgPos token.Pos
+
 	for _, f := range pass.Files {
 		ast.Inspect(f, func(node ast.Node) bool {
 			f, ok := node.(*ast.FuncDecl)
 			if !ok {
+				if node == nil {
+					return true
+				}
+				if file, ok := node.(*ast.File); ok {
+					pkgName = file.Name.Name
+					pkgPos = node.Pos()
+				}
 				// we check function by function
 				return true
 			}
@@ -43,7 +56,9 @@ func run(pass *analysis.Pass) (interface{}, error) {
 				return true
 			}
 
+			count++
 			comp := complexity(f)
+			sum += float64(comp)
 			if comp > maxComplexity {
 				pass.Reportf(node.Pos(), "calculated cyclomatic complexity for function %s is %d, max is %d", f.Name.Name, comp, maxComplexity)
 			}
@@ -51,6 +66,14 @@ func run(pass *analysis.Pass) (interface{}, error) {
 			return true
 		})
 	}
+
+	if packageAverage > 0 {
+		avg := sum / count
+		if avg > packageAverage {
+			pass.Reportf(pkgPos, "the avarage complexity for the package %s is %f, max is %f", pkgName, avg, packageAverage)
+		}
+	}
+
 	return nil, nil
 }
 

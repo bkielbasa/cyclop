@@ -39,7 +39,7 @@ Flags:
   -memprofile string
         write memory profile to this file
   -packageAverage float
-        max avarage complexity in package
+        max average complexity in package
   -skipTests
         should the linter execute on test files as well
   -source
@@ -54,5 +54,5 @@ Flags:
 
 Important parameters are:
 * `-maxComplexity int` - the max complexity calculated for a single function. `10` by default
-* `-packageAvarage float64` - the average cyclomatic complexity for a package. If the value is higher than `0` it will reaise an error if the average will be higher. `0` default. 
+* `-packageAverage float64` - the average cyclomatic complexity for a package. If the value is higher than `0` it will reaise an error if the average will be higher. `0` default. 
 * `-skipTests bool` - should checks be executed in tests files. `false` by default

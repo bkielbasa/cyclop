@@ -1,9 +1,5 @@
 module github.com/bkielbasa/cyclop
 
-go 1.14
+go 1.15
 
-require (
-	github.com/go-bdd/gobdd v1.0.0
-	github.com/stretchr/testify v1.4.0
-	golang.org/x/tools v0.1.0
-)
+require golang.org/x/tools v0.1.0

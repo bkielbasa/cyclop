@@ -1,4 +1,4 @@
-package avg // want "the avarage complexity for the package avg"
+package avg // want "the average complexity for the package avg"
 
 func complexityIs10() {
 	i := 1

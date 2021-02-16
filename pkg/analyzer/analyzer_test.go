@@ -32,7 +32,7 @@ func TestIfTestFunctionsAreSkipped(t *testing.T) {
 	analysistest.Run(t, testdata, NewAnalyzer(), "tests")
 }
 
-func TestAvarageComplexityOfAPackage(t *testing.T) {
+func TestAverageComplexityOfAPackage(t *testing.T) {
 	wd, err := os.Getwd()
 	if err != nil {
 		t.Fatalf("Failed to get wd: %s", err)

@@ -34,4 +34,4 @@ jobs:
       run: goveralls -coverprofile=covprofile -service=github
 
     - name: Check it's own cyclomatic complexity
-      run: go run v2/cmd/cyclop/main.go ./v2/pkg/analyzer/
+      run: go run ./cmd/cyclop/ ./pkg/analyzer/

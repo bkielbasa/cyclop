@@ -10,8 +10,6 @@ linters-settings:
     min-occurrences: 3
   misspell:
     locale: US
-  gci:
-    local-prefixes: github.com/kulti/thelper
 
 linters:
   enable-all: true

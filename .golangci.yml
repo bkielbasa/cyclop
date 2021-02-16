@@ -1,0 +1,31 @@
+run:
+  skip-dirs:
+    - pkg/analyzer/testdata
+
+linters-settings:
+  golint:
+    min-confidence: 0
+  goconst:
+    min-len: 2
+    min-occurrences: 3
+  misspell:
+    locale: US
+  gci:
+    local-prefixes: github.com/kulti/thelper
+
+linters:
+  enable-all: true
+  disable:
+  - lll
+  - prealloc
+  - dupl
+  - wsl
+  - nlreturn
+  - goerr113
+  - exhaustivestruct
+  - paralleltest
+  - testpackage
+  - gomnd
+  - gocognit
+  - nestif
+  - interfacer

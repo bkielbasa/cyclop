@@ -2,7 +2,7 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/bkielbasa/cyclop/badge.svg?branch=master)](https://coveralls.io/github/bkielbasa/cyclop?branch=master)
 
-Cyclop calculates cyclomatic complexities of functions in Go source code.
+Cyclop calculates cyclomatic complexities of functions or packages in Go source code.
 
 ## Usage
 

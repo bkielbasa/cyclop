@@ -4,55 +4,19 @@
 
 Cyclop calculates cyclomatic complexities of functions or packages in Go source code.
 
+## Why cyclop?
+
+Cyclop, compared to [other alternative](https://github.com/fzipp/gocyclo), calculates both function and package cyclomatic complexity.
+
 ## Usage
 
 ```
-go get github.com/bkielbasa/cyclop
+go get github.com/bkielbasa/cyclop/cmd/cyclop
+
+cyclop .
 ```
 
-Options
-
-```
-cyclop: calculates cyclomatic complexity
-
-Usage: cyclop [-flag] [package]
-
-
-Flags:
-  -V    print version and exit
-  -all
-        no effect (deprecated)
-  -c int
-        display offending line with this many lines of context (default -1)
-  -cpuprofile string
-        write CPU profile to this file
-  -debug string
-        debug flags, any subset of "fpstv"
-  -fix
-        apply all suggested fixes
-  -flags
-        print analyzer flags in JSON
-  -json
-        emit JSON output
-  -maxComplexity int
-        max complexity the function can have (default 10)
-  -memprofile string
-        write memory profile to this file
-  -packageAverage float
-        max average complexity in package
-  -skipTests
-        should the linter execute on test files as well
-  -source
-        no effect (deprecated)
-  -tags string
-        no effect (deprecated)
-  -trace string
-        write trace log to this file
-  -v    no effect (deprecated)
-
-```
-
-Important parameters are:
+Available parameters:
 * `-maxComplexity int` - the max complexity calculated for a single function. `10` by default
 * `-packageAverage float64` - the average cyclomatic complexity for a package. If the value is higher than `0` it will reaise an error if the average will be higher. `0` default. 
 * `-skipTests bool` - should checks be executed in tests files. `false` by default

@@ -18,5 +18,5 @@ cyclop .
 
 Available parameters:
 * `-maxComplexity int` - the max complexity calculated for a single function. `10` by default
-* `-packageAverage float64` - the average cyclomatic complexity for a package. If the value is higher than `0` it will reaise an error if the average will be higher. `0` default. 
+* `-packageAverage float64` - the average cyclomatic complexity for a package. If the value is higher than `0` it will raise an error if the average will be higher. `0` default. 
 * `-skipTests bool` - should checks be executed in tests files. `false` by default

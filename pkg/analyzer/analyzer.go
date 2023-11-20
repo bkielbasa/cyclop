@@ -29,7 +29,7 @@ func init() {
 func NewAnalyzer() *analysis.Analyzer {
 	return &analysis.Analyzer{
 		Name:  "cyclop",
-		Doc:   "calculates cyclomatic complexity",
+		Doc:   "checks function and package cyclomatic complexity",
 		Run:   run,
 		Flags: flagSet,
 	}

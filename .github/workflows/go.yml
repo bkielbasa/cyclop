@@ -33,13 +33,7 @@ jobs:
 
     - name: Run Unit tests
       run: |
-        go test -race -covermode atomic -coverprofile=covprofile ./...
-    - name: Install goveralls
-      run: go get github.com/mattn/goveralls
-    - name: Send coverage
-      env:
-        COVERALLS_TOKEN: ${{ secrets.github_token }}
-      run: goveralls -coverprofile=covprofile -service=github
+        go test -race ./...
 
     - name: Check it's own cyclomatic complexity
       run: go run ./cmd/cyclop/ ./pkg/analyzer/

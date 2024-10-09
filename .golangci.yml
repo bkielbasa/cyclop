@@ -1,6 +1,5 @@
-run:
-  skip-dirs:
-    - pkg/analyzer/testdata
+issues.exclude-dirs:
+  - pkg/analyzer/testdata
 
 linters-settings:
   golint:
@@ -18,9 +17,10 @@ linters:
   - prealloc
   - dupl
   - wsl
+  - depguard
+  - nilnil
+  - exhaustruct
   - nlreturn
-  - goerr113
-  - exhaustivestruct
   - paralleltest
   - testpackage
   - gomnd

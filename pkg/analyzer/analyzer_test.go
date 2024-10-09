@@ -9,31 +9,31 @@ import (
 )
 
 func TestAll(t *testing.T) {
-	wd, err := os.Getwd()
+	path, err := os.Getwd()
 	if err != nil {
 		t.Fatalf("Failed to get wd: %s", err)
 	}
 
 	skipTests = false
 
-	testdata := filepath.Join(filepath.Dir(filepath.Dir(wd)), "testdata")
+	testdata := filepath.Join(filepath.Dir(filepath.Dir(path)), "testdata")
 	analysistest.Run(t, testdata, NewAnalyzer(), "p")
 }
 
 func TestIfTestFunctionsAreSkipped(t *testing.T) {
-	wd, err := os.Getwd()
+	path, err := os.Getwd()
 	if err != nil {
 		t.Fatalf("Failed to get wd: %s", err)
 	}
 
 	skipTests = true
 
-	testdata := filepath.Join(filepath.Dir(filepath.Dir(wd)), "testdata")
+	testdata := filepath.Join(filepath.Dir(filepath.Dir(path)), "testdata")
 	analysistest.Run(t, testdata, NewAnalyzer(), "tests")
 }
 
 func TestAverageComplexityOfAPackage(t *testing.T) {
-	wd, err := os.Getwd()
+	path, err := os.Getwd()
 	if err != nil {
 		t.Fatalf("Failed to get wd: %s", err)
 	}
@@ -41,6 +41,6 @@ func TestAverageComplexityOfAPackage(t *testing.T) {
 	skipTests = false
 	packageAverage = 5
 
-	testdata := filepath.Join(filepath.Dir(filepath.Dir(wd)), "testdata")
+	testdata := filepath.Join(filepath.Dir(filepath.Dir(path)), "testdata")
 	analysistest.Run(t, testdata, NewAnalyzer(), "avg")
 }

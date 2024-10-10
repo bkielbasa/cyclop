@@ -2,7 +2,7 @@ package p
 
 import "testing"
 
-func TestIfTestFunctionsArentSkipped(t *testing.T) { // want "calculated cyclomatic complexity for function"
+func TestIfTestFunctionsArentSkipped(t *testing.T) { // want "calculated cyclomatic complexity for function TestIfTestFunctionsArentSkipped is 11, max is 10"
 	i := 1
 	if i > 2 {
 		if i > 2 {

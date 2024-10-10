@@ -1,9 +1,4 @@
-issues.exclude-dirs:
-  - pkg/analyzer/testdata
-
 linters-settings:
-  golint:
-    min-confidence: 0
   goconst:
     min-len: 2
     min-occurrences: 3
@@ -13,6 +8,8 @@ linters-settings:
 linters:
   enable-all: true
   disable:
+  - exportloopref # deprecated
+  - execinquery # deprecated
   - lll
   - prealloc
   - dupl
@@ -26,4 +23,3 @@ linters:
   - gomnd
   - gocognit
   - nestif
-  - interfacer

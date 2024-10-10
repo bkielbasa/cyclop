@@ -67,7 +67,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 			comp := complexity(funcDecl)
 			sum += float64(comp)
 			if comp > maxComplexity {
-				pass.Reportf(node.Pos(), "calculated cyclomatic complexity for function %s is %d, max is %d", file.Name.Name, comp, maxComplexity)
+				pass.Reportf(node.Pos(), "calculated cyclomatic complexity for function %s is %d, max is %d", funcDecl.Name.Name, comp, maxComplexity)
 			}
 
 			return true
